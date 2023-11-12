@@ -18,11 +18,11 @@ export class PostService {
     return this.prisma.post.create({ data });
   }
 
-  async update(data: PostUpdateInput, where: PostWhereUniqueInput): Promise<Post> {
-    return this.prisma.post.update({ data, where });
-  }
-
-  async delete(where: PostWhereUniqueInput): Promise<Post> {
-    return this.prisma.post.delete({ where });
-  }
+  // async update(data: PostUpdateInput, where: PostWhereUniqueInput): Promise<Post> {
+  //   return this.prisma.post.update({ data, where });
+  // }
+  //
+  // async delete(where: PostWhereUniqueInput): Promise<Post> {
+  //   return this.prisma.post.delete({ where });
+  // }
 }

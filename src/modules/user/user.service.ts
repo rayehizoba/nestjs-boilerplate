@@ -15,19 +15,19 @@ export class UserService {
     return this.prisma.user.findMany({ ...args, ...select });
   }
 
-  async update(data: UserUpdateInput, where: UserWhereUniqueInput): Promise<User> {
-    return this.prisma.user.update({ data, where });
-  }
-
-  async delete(where: UserWhereUniqueInput): Promise<User> {
-    return this.prisma.user.delete({ where });
-  }
-
-  async updateRole(data: UpdateUserRoleInput, where: UserWhereUniqueInput): Promise<User> {
-    return this.prisma.user.update({ data, where });
-  }
-
-  async updateStatus(data: UpdateUserStatusInput, where: UserWhereUniqueInput): Promise<User> {
-    return this.prisma.user.update({ data, where });
-  }
+  // async update(data: UserUpdateInput, where: UserWhereUniqueInput): Promise<User> {
+  //   return this.prisma.user.update({ data, where });
+  // }
+  //
+  // async delete(where: UserWhereUniqueInput): Promise<User> {
+  //   return this.prisma.user.delete({ where });
+  // }
+  //
+  // async updateRole(data: UpdateUserRoleInput, where: UserWhereUniqueInput): Promise<User> {
+  //   return this.prisma.user.update({ data, where });
+  // }
+  //
+  // async updateStatus(data: UpdateUserStatusInput, where: UserWhereUniqueInput): Promise<User> {
+  //   return this.prisma.user.update({ data, where });
+  // }
 }

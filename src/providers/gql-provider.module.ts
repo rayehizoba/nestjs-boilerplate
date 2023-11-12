@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { GraphQLModule } from '@nestjs/graphql';
-import { join } from 'path';
-import { GraphqlConfig } from 'src/config/config.types';
+import {Module} from '@nestjs/common';
+import {ConfigService} from '@nestjs/config';
+import {GraphQLModule} from '@nestjs/graphql';
+import {join} from 'path';
+import {GraphqlConfig} from 'src/config/config.types';
+import {ApolloDriver} from '@nestjs/apollo';
 
 @Module({
   imports: [
@@ -16,11 +17,13 @@ import { GraphqlConfig } from 'src/config/config.types';
           playground: config.playground,
           introspection: config.introspection,
           installSubscriptionHandlers: config.installSubscriptionHandlers,
-          context: ({ req }) => ({ req }),
+          context: ({req}) => ({req}),
         };
       },
       inject: [ConfigService],
+      driver: ApolloDriver,
     }),
   ],
 })
-export class GqlProviderModule {}
+export class GqlProviderModule {
+}
