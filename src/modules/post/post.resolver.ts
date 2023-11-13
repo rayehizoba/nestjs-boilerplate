@@ -5,8 +5,8 @@ import { GraphQLResolveInfo } from 'graphql';
 import { PubSub } from 'graphql-subscriptions';
 import { FindManyPostArgs } from 'src/@generated/post/find-many-post.args';
 import { PostCreateInput } from 'src/@generated/post/post-create.input';
-// import { PostUpdateInput } from 'src/@generated/post/post-update.input';
-// import { PostWhereUniqueInput } from 'src/@generated/post/post-where-unique.input';
+import { PostUpdateInput } from 'src/@generated/post/post-update.input';
+import { PostWhereUniqueInput } from 'src/@generated/post/post-where-unique.input';
 import { Post } from 'src/@generated/post/post.model';
 import { Authorize } from '../auth/guards/authorize.guard';
 import { PostService } from './post.service';
@@ -37,26 +37,26 @@ export class PostResolver {
   @Mutation(() => Post)
   async postCreate(@Args('data') data: PostCreateInput): Promise<Post> {
     const createdPost = this.postService.create(data);
-    this.pubSub.publish(this.POST_CREATED, { postChanged: createdPost });
+    await this.pubSub.publish(this.POST_CREATED, {postChanged: createdPost});
     return createdPost;
   }
 
-  // @Authorize()
-  // @Mutation(() => Post)
-  // async postUpdate(
-  //   @Args('data') data: PostUpdateInput,
-  //   @Args('where') where: PostWhereUniqueInput,
-  // ): Promise<Post> {
-  //   const updatedPost = this.postService.update(data, where);
-  //   this.pubSub.publish(this.POST_UPDATED, { postChanged: updatedPost });
-  //   return updatedPost;
-  // }
-  //
-  // @Authorize()
-  // @Mutation(() => Post)
-  // async postDelete(@Args('where') where: PostWhereUniqueInput): Promise<Post> {
-  //   const deletedPost = this.postService.delete(where);
-  //   this.pubSub.publish(this.POST_REMOVED, { postChanged: deletedPost });
-  //   return deletedPost;
-  // }
+  @Authorize()
+  @Mutation(() => Post)
+  async postUpdate(
+    @Args('data') data: PostUpdateInput,
+    @Args('where') where: PostWhereUniqueInput,
+  ): Promise<Post> {
+    const updatedPost = this.postService.update(data, where);
+    await this.pubSub.publish(this.POST_UPDATED, {postChanged: updatedPost});
+    return updatedPost;
+  }
+
+  @Authorize()
+  @Mutation(() => Post)
+  async postDelete(@Args('where') where: PostWhereUniqueInput): Promise<Post> {
+    const deletedPost = this.postService.delete(where);
+    await this.pubSub.publish(this.POST_REMOVED, {postChanged: deletedPost});
+    return deletedPost;
+  }
 }
