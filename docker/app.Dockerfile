@@ -8,7 +8,7 @@ COPY tsconfig.build*.json ./
 
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
-COPY prisma ./prisma/
+COPY ../prisma ./prisma/
 
 # Install app dependencies
 RUN npm install -g npm@latest
@@ -16,7 +16,7 @@ RUN npm install --verbose --no-optional
 
 RUN npx prisma generate
 
-COPY . .
+COPY .. .
 
 RUN npm run build
 
