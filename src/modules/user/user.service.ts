@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '@prisma/client';
 import { FindManyUserArgs } from 'src/@generated/user/find-many-user.args';
 import { UserUpdateInput } from 'src/@generated/user/user-update.input';
 import { UserWhereUniqueInput } from 'src/@generated/user/user-where-unique.input';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateUserRoleInput } from './dto/update-user-role.input';
 import { UpdateUserStatusInput } from './dto/update-user-status.input';
+import { User } from '../../@generated/user/user.model';
 
 @Injectable()
 export class UserService {
